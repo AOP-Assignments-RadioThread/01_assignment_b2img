@@ -111,34 +111,5 @@ var image = new int[6,7] {
 
 ---
 
-## **Setup Instructions**
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/B2ImgEditor.git
-   cd B2ImgEditor
-   ```
-2. Build the project:
-   ```sh
-   dotnet build
-   ```
-3. Run the application:
-   ```sh
-   dotnet run
-   ```
-
----
-
-## **Contribution Guidelines**
-- Fork the repository.
-- Create a new branch (`feature/your-feature`).
-- Make changes and test thoroughly.
-- Open a **pull request** for review.
-
----
-
-## **License**
-This project is licensed under the **MIT License**. See `LICENSE` for details.
-
-🚀 *Happy coding!*
 
 
