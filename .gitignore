@@ -1,0 +1,46 @@
+# === 🛑 Build & Debug Files (Ignore Compiled Binaries) ===
+bin/
+obj/
+*.pdb
+*.exe
+*.dll
+*.log
+
+# === 🖥️ Avalonia UI Designer Cache ===
+.avalonia/
+
+# === 🚀 JetBrains Rider IDE ===
+.idea/
+*.sln.iml
+
+# === 🔵 Visual Studio Temporary Files ===
+.vs/
+*.csproj.user
+
+# === 📦 NuGet Packages (Can Be Restored with 'dotnet restore') ===
+packages/
+*.nupkg
+project.lock.json
+.nuget/
+
+# === 📝 Logs & Temp Files ===
+logs/
+*.log
+*.tmp
+*.bak
+*.swp
+
+# === 🟣 Visual Studio Code Workspace Files ===
+.vscode/
+*.code-workspace
+*.history/
+
+# === 🍏 macOS System Files ===
+.DS_Store
+
+# === 🖥️ Windows System Files ===
+Thumbs.db
+
+# === ⚠️ Ignore Secrets & User Settings (If Any) ===
+secrets.json
+.env
