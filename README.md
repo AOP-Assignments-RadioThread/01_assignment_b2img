@@ -43,19 +43,6 @@ To earn two bonus points, implement at least one of the following:
 
 ---
 
-## **Project Structure**
-```
-B2ImgEditor/
-│── Models/        # File parsing & image data handling
-│── ViewModels/    # MVVM logic (data binding & commands)
-│── Views/         # UI components (Avalonia XAML)
-│── Resources/     # Icons, themes, additional assets
-│── README.md      # This file
-│── .gitignore     # Files to be ignored by Git
-│── LICENSE        # License information
-```
-
----
 
 ## **User Interface**
 The application displays an **interactive pixel grid**, allowing users to **edit** and **save** images. Example UI:
