@@ -1,38 +1,35 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-namespace ImageEditor.ViewModels;
-
-public class PixelViewModel : ViewModelBase
+namespace ImageEditor.ViewModels
 {
-    private bool _isActive; //This property represents if the pixel if on(true)/off(false)
-
-    public bool IsActive
+    public class PixelViewModel : ViewModelBase
     {
-        get => _isActive;
-        set
+        private bool _isActive;
+        public bool IsActive
         {
-            if (_isActive != value)
+            get => _isActive;
+            set
             {
-                _isActive = value;
-                OnPropertyChanged();
+                if (_isActive != value)
+                {
+                    _isActive = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
-    
-    // This command is triggered when the user clicks on the pixel.
-    public ICommand ToggleCommand { get; }
-    
-    // The constructor takes the initial state of the pixel.
-    public PixelViewModel(bool initialState)
-    {
-        IsActive = initialState;
-        ToggleCommand = new RelayCommand(Toggle);
-    }
+        
+        public ICommand ToggleCommand { get; }
 
-    // This method flips the pixel's state.
-    private void Toggle()
-    {
-        IsActive = !IsActive;
+        public PixelViewModel(bool initialState)
+        {
+            IsActive = initialState;
+            ToggleCommand = new RelayCommand(Toggle);
+        }
+
+        private void Toggle()
+        {
+            IsActive = !IsActive;
+        }
     }
 }
