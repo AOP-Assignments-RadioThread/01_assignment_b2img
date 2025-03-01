@@ -4,4 +4,5 @@ namespace ImageEditor.ViewModels;
 
 public class ViewModelBase : ObservableObject
 {
+    
 }
