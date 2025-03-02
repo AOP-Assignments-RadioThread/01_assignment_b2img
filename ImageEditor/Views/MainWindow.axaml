@@ -20,7 +20,7 @@
         <converters:BooleanToBrushConverter x:Key="BooleanToBrushConverter"/>
     </Window.Resources>
 
-    <Grid Background="Crimson" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <StackPanel VerticalAlignment="Center">
         <ItemsControl ItemsSource="{Binding Pixels}">
             <ItemsControl.ItemsPanel>

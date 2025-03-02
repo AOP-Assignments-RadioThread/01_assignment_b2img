@@ -20,7 +20,7 @@ public class B2Img
         var dimensions = lines[0].Split(' ');
         if (dimensions.Length != 2) throw new Exception("Invalid format");
      
-        if (int.TryParse(dimensions[0], out int width))
+        if (int.TryParse(dimensions[1], out int width))
         {
             Console.WriteLine($"Width parsed successfully: {width}");
         }
@@ -29,7 +29,7 @@ public class B2Img
             throw new Exception("Invalid format: width");
         }
     
-        if (int.TryParse(dimensions[1], out int height))
+        if (int.TryParse(dimensions[0], out int height))
         {
             Console.WriteLine($"Width parsed successfully: {height}");
         }
@@ -39,21 +39,29 @@ public class B2Img
         }
 
         
-        //Separate image
+        // Separate image
         var pixels = new int[height, width];
         string[] pixelData = lines[1..];
 
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                pixels[i, j] = int.Parse(pixelData[i][j].ToString());
-            }
-        }
-        
-        return new B2Img { Width = width, Height = height, Pixels = pixels };
-    }
+        // Combine all pixel lines into one continuous string
+        string combinedData = string.Concat(pixelData);
 
+        // Check if there are enough characters to fill the image
+        if (combinedData.Length < width * height)
+            throw new Exception("Invalid format: not enough pixel data");
+
+        // Parse pixel data sequentially into the 2D array
+        for (int i = 0; i < width * height; i++)
+        {
+            int row = i / width; // integer division gives the current row
+            int col = i % width; // remainder gives the column within the row
+            pixels[row, col] = int.Parse(combinedData[i].ToString());
+        }
+
+        return new B2Img { Width = width, Height = height, Pixels = pixels };
+       
+    }
+  
     public void Save (string path)
     {
         using(StreamWriter writer = new StreamWriter(path))
