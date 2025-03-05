@@ -1,35 +1,29 @@
+using System;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ImageEditor.Views;
 
 namespace ImageEditor.ViewModels
 {
-    public class PixelViewModel : ViewModelBase
+    public partial class PixelViewModel : ObservableObject
     {
-        private bool _isActive;
-        public bool IsActive
-        {
-            get => _isActive;
-            set
-            {
-                if (_isActive != value)
-                {
-                    _isActive = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        [ObservableProperty]
+        private int _color;
         
-        public ICommand ToggleCommand { get; }
 
-        public PixelViewModel(bool initialState)
+        public PixelViewModel (int initialColor)
         {
-            IsActive = initialState;
-            ToggleCommand = new RelayCommand(Toggle);
+            Color = initialColor;
+            
         }
 
-        private void Toggle()
+        [RelayCommand]
+        private void ChangeColor(int newColor)
         {
-            IsActive = !IsActive;
+           Color = newColor;
+           Console.Write($"{_color}");
+           
         }
     }
 }

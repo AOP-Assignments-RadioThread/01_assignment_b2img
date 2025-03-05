@@ -9,11 +9,17 @@ namespace ImageEditor.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isActive)
+            switch (value)
             {
-                return isActive ? Brushes.Black : Brushes.White;
+                case 0:
+                    return Brushes.Black;
+                case 1:
+                    return Brushes.White;
+                case 2:
+                    return Brushes.Red;
+                default:
+                    return Brushes.Transparent;
             }
-            return Brushes.Transparent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
