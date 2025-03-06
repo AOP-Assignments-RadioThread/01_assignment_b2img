@@ -1,102 +1,31 @@
-# 01_assignment_b2img
-This is the first bonus point homework assignment, covering the introduction lectures to GUI Object Oriented Programming.
+# How to Use
 
-# **B2Img Editor**
+This application provides two tabs for working with image files stored as text files:
 
-## **Overview**
-This repository contains an application that enables users to **read, modify, and save** `.b2img.txt` files through a graphical interface.
+- **b2img.txt Tab**  
+  - Supports **.b2img.txt** files, which should work exactly as shown in the provided example.  
+  - Use the *Import* button to load a file from your system.  
 
-## **Features**
-### **Base Features**
-- Load a `.b2img.txt` file and parse its contents.
-- Display the image as a **grid of pixels**.
-- Allow users to **modify pixels** by clicking on them.
-- Save the modified file in the `.b2img.txt` format.
+- **b16img.txt Tab**  
+  - Supports **.b16img.txt** files, but these must follow a specific format since we didn't have time to modify the parser.  
+  - The **first two lines** must define the **width** and **height** of the image.  
+  - The following lines should contain pixel colors represented as **integers from 0 to 15**, separated by spaces.  
+  - Each row must start on a **new line**.
 
-### **File Format**
-A `.b2img.txt` file consists of:
-- **First Line**: Two numbers separated by a space (**height** and **width** of the image).
-- **Remaining Lines**: A sequence of `0`s and `1`s representing the pixel values.
+### Example b16img.txt File
 
-#### **Example (`smile.b2img.txt`)**:
 ```
-6 7            
-010001000000000
-000000000000010
-000010111110   
+3 3
+12 13 14
+1 2 4
+5 4 11
 ```
 
----
+### Features
+- Press the *Import* button to **select and load a text file**.  
+- Use the **color palette** to choose a color.  
+- Click on a square to **change its color** to the selected one.
+- Click on the save button to save the changes to the selected file.  
 
-## **Grading & Bonus Features**
-### **Basic Requirements (1 Bonus Point)**
-- The application should be easy to set up and use.
-- It must support all required base functionalities.
-
-### **Advanced Features (2 Bonus Points)**
-To earn two bonus points, implement at least one of the following:
-- **New Image Format (`.b16img.txt`)**: Supports color images.
-- **Binary File Format (`.b2img`)**: Store image data in binary format instead of text.
-- **Import/Export to PNG/BMP**: Convert `.b2img.txt` to/from standard image formats.
-- **Multi-File Tabs**: Allow multiple images to be open simultaneously.
-- **Image Flipping**: Implement horizontal/vertical flip functionality.
-
----
-
-
-## **User Interface**
-The application displays an **interactive pixel grid**, allowing users to **edit** and **save** images. Example UI:
-```
-╭──────────────────╮
-│ example.app   ─ X│
-├──────────────────┤
-│     size:6x7     │
-│ ╔══════════════╗ │
-│ ║  ██      ██  ║ │
-│ ║  ██      ██  ║ │
-│ ║              ║ │
-│ ║      ██      ║ │
-│ ║██          ██║ │
-│ ║  ██████████  ║ │
-│ ╚══════════════╝ │
-│╭────────────────╮│
-││out.b2img.txt   ││
-│╰────────────────╯│
-│ ╭──────╮╭──────╮ │
-│ │ load ││ save │ │
-│ ╰──────╯╰──────╯ │
-╰──────────────────╯
-```
-
----
-
-## **Code Example**
-
-#### **Before Modification**:
-```csharp
-var image = new int[6,7] {
- {0,1,0,0,0,1,0},
- {0,0,0,0,0,0,0},
- {0,0,0,0,0,0,0},
- {0,0,0,0,0,0,0},
- {1,0,0,0,0,0,1},
- {0,1,1,1,1,1,0}
-};
-```
-
-#### **After Modification**:
-```csharp
-var image = new int[6,7] {
- {0,1,0,0,0,1,0},
- {0,1,0,0,0,1,0},
- {0,0,0,0,0,0,0},
- {0,0,0,1,0,0,0},
- {1,0,0,0,0,0,1},
- {0,1,1,1,1,1,0}
-};
-```
-
----
-
-
+You can use the example files provided in the repository to test the application.
 
