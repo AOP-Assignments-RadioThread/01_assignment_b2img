@@ -1,79 +1,178 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImageEditor.Models;
+using ImageEditor.Services;
 
 namespace ImageEditor.ViewModels;
 using System.Collections.ObjectModel;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    public ObservableCollection<PixelViewModel> Pixels { get; }
+    public ObservableCollection<PixelViewModel> FirstImage { get; }
+    public ObservableCollection<PixelViewModel> SecondImage { get; }
+    
+    private readonly IDialogService _dialogService;
+    [ObservableProperty]
+    private string? _filePathB2img;
+    [ObservableProperty]
+    private string? _filePathB16img;
 
-    [ObservableProperty] private int _selectedColor = 1;
-    public int GridColumns { get; set; } = 5;
-    public int GridRows { get; set; } = 5;
-    public string ImagePath { get; set; } = "";
-    public ICommand SaveCommand { get; set; }
+
+    [ObservableProperty] private int _selectedColorFirst = 0;
+    [ObservableProperty] private int _selectedColorSecond = 0;
+
+    [ObservableProperty] private int _gridColumnsFirst;
+    [ObservableProperty] private int _gridRowsFirst;
+    
+    [ObservableProperty] private int _gridColumnsSecond;
+    [ObservableProperty] private int _gridRowsSecond;
+    
+    
 
 
-    public MainWindowViewModel()
-    { 
+    public MainWindowViewModel(IDialogService dialogService)
+    {
+
+        _dialogService = dialogService;
         
-        SaveCommand = new RelayCommand(SaveCurrentState);
-        Pixels = new ObservableCollection<PixelViewModel>();
-        ImagePath = "/Users/victorpetrica/Desktop/AOP shit/Assignments/01_assignment_b2img/ImageEditor/Assets/image.txt";
-        B2Img test = B2Img.Load(ImagePath);
+        FirstImage = new ObservableCollection<PixelViewModel>();
+        SecondImage = new ObservableCollection<PixelViewModel>();
         
-        // Print the dimensions of the image
-        Console.WriteLine($"Width: {test.Width}. \nHeight: {test.Height}");
-        Console.WriteLine();
-        
-     
-        GridRows = test.Pixels.GetLength(0);
-        GridColumns = test.Pixels.GetLength(1);
-
-        for (int i = 0; i < GridRows; i++)
+    }
+    
+    [RelayCommand]
+    private async Task OpenFileDialogAsyncFirst()
+    {
+        var filePath = await _dialogService.ShowOpenFileDialogAsync();
+        if (!string.IsNullOrEmpty(filePath))
         {
-            for (int j = 0; j < GridColumns; j++)
-            {
-                bool state;
-                // Print each element followed by a space
-                Console.Write(test.Pixels[i, j] + " ");
-                Pixels.Add(new PixelViewModel(test.Pixels[i,j]));
-            }
-            // Move to the next line after each row
-            Console.WriteLine();
+            FilePathB2img = filePath;
+            ImportB2Img(filePath);
+        }
+    }
+    [RelayCommand]
+    private async Task OpenFileDialogAsyncSecond()
+    {
+        var filePath = await _dialogService.ShowOpenFileDialogAsync();
+        if (!string.IsNullOrEmpty(filePath))
+        {
+            FilePathB16img = filePath;
+            ImportB16Img(filePath);
         }
     }
 
     [RelayCommand]
-    public void ChangeSelectedColor(string newColor)
+    public void ChangeSelectedColorFirst(string newColor)
     {
-        SelectedColor = int.Parse(newColor);
+        SelectedColorFirst = int.Parse(newColor);
     }
-    public void SaveCurrentState()
+    
+    [RelayCommand]
+    public void ChangeSelectedColorSecond(string newColor)
     {
-        var updatedPixels = new int[GridRows, GridColumns];
+        SelectedColorSecond = int.Parse(newColor);
+    }
+    
+    [RelayCommand]
+    public void SaveFirstImage()
+    {
+        var updatedPixels = new int[GridRowsFirst, GridColumnsFirst];
 
-        for (int i = 0; i < GridRows; i++)
+        for (int i = 0; i < GridRowsFirst; i++)
         {
-            for (int j = 0; j < GridColumns; j++)
+            for (int j = 0; j < GridColumnsFirst; j++)
             {
-                var pixel = Pixels[i * GridColumns + j];
+                var pixel = FirstImage[i * GridColumnsFirst + j];
                 updatedPixels[i, j] = pixel.Color;
             }
         }
 
         B2Img newImage = new B2Img
         {
-            Width = GridColumns,
-            Height = GridRows,
+            Width = GridColumnsFirst,
+            Height = GridRowsFirst,
             Pixels = updatedPixels
         };
         
-        newImage.Save(ImagePath);
+        newImage.Save(FilePathB2img);
+    }
+    
+    [RelayCommand]
+    public void SaveSecondImage()
+    {
+        var updatedPixels = new int[GridRowsSecond, GridColumnsSecond];
 
+        for (int i = 0; i < GridRowsSecond; i++)
+        {
+            for (int j = 0; j < GridColumnsSecond; j++)
+            {
+                var pixel = SecondImage[i * GridColumnsSecond + j];
+                updatedPixels[i, j] = pixel.Color;
+            }
+        }
+
+        B16Img newImage = new B16Img
+        {
+            Width = GridColumnsSecond,
+            Height = GridRowsSecond,
+            Pixels = updatedPixels
+        };
+        Console.WriteLine($"Width: {newImage.Width} Height: {newImage.Height}");
+        
+        newImage.Save(FilePathB16img);
+
+    }
+
+    public void ImportB2Img(string filePath)
+    {
+        if (FirstImage is not null)
+        {
+            FirstImage.Clear();
+        }
+        B2Img img = B2Img.Load(FilePathB2img);
+        
+        if (img is null)
+        {
+            return;
+        }
+        GridRowsFirst = img.Pixels.GetLength(0);
+        GridColumnsFirst = img.Pixels.GetLength(1);
+
+        for (int i = 0; i < GridRowsFirst; i++)
+        {
+            for (int j = 0; j < GridColumnsFirst; j++)
+            {
+                FirstImage.Add(new PixelViewModel(img.Pixels[i, j]));
+            }
+        }
+        
+    }
+    public void ImportB16Img(string filePath)
+    {
+        if (FirstImage is not null)
+        {
+            FirstImage.Clear();
+        }
+        B16Img img = B16Img.Load(FilePathB16img);
+
+        if (img is null)
+        {
+            return;
+        }
+        GridRowsSecond = img.Pixels.GetLength(0);
+        GridColumnsSecond = img.Pixels.GetLength(1);
+
+        for (int i = 0; i < GridRowsSecond; i++)
+        {
+            for (int j = 0; j < GridColumnsSecond; j++)
+            {
+                SecondImage.Add(new PixelViewModel(img.Pixels[i, j]));
+            }
+        }
+        
     }
 }

@@ -2,7 +2,7 @@
     Height="500"
     Icon="/Assets/avalonia-logo.ico"
     Title="ImageEditor"
-    Width="500"
+    Width="700"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
@@ -22,61 +22,220 @@
     <Window.Resources>
         <converters:BooleanToBrushConverter x:Key="BooleanToBrushConverter" />
     </Window.Resources>
-
-    <Grid
-        Background="Gray"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
-        <StackPanel VerticalAlignment="Center">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button
-                    Background="Red"
-                    Command="{Binding ChangeSelectedColorCommand}"
-                    CommandParameter="2"
-                    Height="30"
-                    Width="30" />
-                <Button
-                    Background="White"
-                    Command="{Binding ChangeSelectedColorCommand}"
-                    CommandParameter="1"
-                    Height="30"
-                    Width="30" />
-                <Button
-                    Background="Black"
-                    Command="{Binding ChangeSelectedColorCommand}"
-                    CommandParameter="0"
-                    Height="30"
-                    Width="30" />
-            </StackPanel>
-            <ItemsControl ItemsSource="{Binding Pixels}" x:Name="PixelControl">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid
-                            Columns="{Binding GridColumns}"
-                            HorizontalAlignment="Center"
-                            Rows="{Binding GridRows}"
-                            VerticalAlignment="Center" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-
+    <TabControl>
+        <TabItem Header="B2img">
+            <Grid
+                Background="Tan"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        Margin="30"
+                        Orientation="Horizontal">
                         <Button
-                            Background="{Binding Color, Converter={StaticResource BooleanToBrushConverter}}"
-                            Command="{Binding ChangeColorCommand}"
-                            CommandParameter="{Binding #PixelControl.((vm:MainWindowViewModel)DataContext).SelectedColor}"
+                            Background="Black"
+                            Command="{Binding ChangeSelectedColorFirstCommand}"
+                            CommandParameter="0"
                             Height="30"
-                            Margin="0"
                             Width="30" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Button
-                Background="White"
-                Command="{Binding SaveCommand}"
-                Content="Save"
-                Foreground="Black"
-                HorizontalAlignment="Center" />
-        </StackPanel>
-    </Grid>
+                        <Button
+                            Background="White"
+                            Command="{Binding ChangeSelectedColorFirstCommand}"
+                            CommandParameter="1"
+                            Height="30"
+                            Width="30" />
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding FirstImage}" x:Name="B2imgControl">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid
+                                    Columns="{Binding GridColumnsFirst}"
+                                    HorizontalAlignment="Center"
+                                    Rows="{Binding GridRowsFirst}"
+                                    VerticalAlignment="Center" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Button
+                                    Background="{Binding Color, Converter={StaticResource BooleanToBrushConverter}}"
+                                    Command="{Binding ChangeColorCommand}"
+                                    CommandParameter="{Binding #B2imgControl.((vm:MainWindowViewModel)DataContext).SelectedColorFirst}"
+                                    Height="30"
+                                    Margin="0"
+                                    Width="30" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Grid ColumnDefinitions="*,*" HorizontalAlignment="Center">
+                        <Button
+                            Background="White"
+                            Command="{Binding SaveFirstImageCommand}"
+                            Content="Save"
+                            Foreground="Black"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center" />
+                        <Button
+                            Background="White"
+                            Command="{Binding OpenFileDialogAsyncFirstCommand}"
+                            Content="Import"
+                            Foreground="Black"
+                            Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="B16Img">
+            <Grid
+                Background="Tan"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        Margin="30"
+                        Orientation="Horizontal">
+                        <Button
+                            Background="Black"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="0"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="White"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="1"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Red"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="2"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Green"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="3"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Blue"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="4"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Yellow"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="5"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Magenta"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="6"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Cyan"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="7"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Gray"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="8"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="DarkRed"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="9"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="DarkGreen"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="10"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="DarkBlue"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="11"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Orange"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="12"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Pink"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="13"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Brown"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="14"
+                            Height="30"
+                            Width="30" />
+                        <Button
+                            Background="Purple"
+                            Command="{Binding ChangeSelectedColorSecondCommand}"
+                            CommandParameter="15"
+                            Height="30"
+                            Width="30" />
+
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding SecondImage}" x:Name="B16imgControl">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid
+                                    Columns="{Binding GridColumnsSecond}"
+                                    HorizontalAlignment="Center"
+                                    Rows="{Binding GridRowsSecond}"
+                                    VerticalAlignment="Center" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Button
+                                    Background="{Binding Color, Converter={StaticResource BooleanToBrushConverter}}"
+                                    Command="{Binding ChangeColorCommand}"
+                                    CommandParameter="{Binding #B16imgControl.((vm:MainWindowViewModel)DataContext).SelectedColorSecond}"
+                                    Height="30"
+                                    Margin="0"
+                                    Width="30" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Grid ColumnDefinitions="*,*" HorizontalAlignment="Center">
+                        <Button
+                            Background="White"
+                            Command="{Binding SaveSecondImageCommand}"
+                            Content="Save"
+                            Foreground="Black"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center" />
+                        <Button
+                            Background="White"
+                            Command="{Binding OpenFileDialogAsyncSecondCommand}"
+                            Content="Import"
+                            Foreground="Black"
+                            Grid.Column="1" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

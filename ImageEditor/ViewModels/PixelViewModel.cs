@@ -22,8 +22,6 @@ namespace ImageEditor.ViewModels
         private void ChangeColor(int newColor)
         {
            Color = newColor;
-           Console.Write($"{_color}");
-           
         }
     }
 }
