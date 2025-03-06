@@ -80,6 +80,10 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     public void SaveFirstImage()
     {
+        if (FirstImage.Count == 0)
+        {
+            return;
+        }
         var updatedPixels = new int[GridRowsFirst, GridColumnsFirst];
 
         for (int i = 0; i < GridRowsFirst; i++)
@@ -104,6 +108,10 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     public void SaveSecondImage()
     {
+        if (SecondImage.Count == 0)
+        {
+            return;
+        }
         var updatedPixels = new int[GridRowsSecond, GridColumnsSecond];
 
         for (int i = 0; i < GridRowsSecond; i++)
