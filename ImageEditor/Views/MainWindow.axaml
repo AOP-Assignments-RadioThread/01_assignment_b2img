@@ -36,13 +36,13 @@
                         <Button
                             Background="Black"
                             Command="{Binding ChangeSelectedColorFirstCommand}"
-                            CommandParameter="0"
+                            CommandParameter="1"
                             Height="30"
                             Width="30" />
                         <Button
                             Background="White"
                             Command="{Binding ChangeSelectedColorFirstCommand}"
-                            CommandParameter="1"
+                            CommandParameter="0"
                             Height="30"
                             Width="30" />
                     </StackPanel>
@@ -101,13 +101,13 @@
                         <Button
                             Background="Black"
                             Command="{Binding ChangeSelectedColorSecondCommand}"
-                            CommandParameter="0"
+                            CommandParameter="1"
                             Height="30"
                             Width="30" />
                         <Button
                             Background="White"
                             Command="{Binding ChangeSelectedColorSecondCommand}"
-                            CommandParameter="1"
+                            CommandParameter="0"
                             Height="30"
                             Width="30" />
                         <Button

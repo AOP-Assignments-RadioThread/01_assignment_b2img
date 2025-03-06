@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImageEditor.Models;
 using ImageEditor.Services;
+using System.Collections.ObjectModel;
 
 namespace ImageEditor.ViewModels;
-using System.Collections.ObjectModel;
 
 public partial class MainWindowViewModel : ObservableObject
 {

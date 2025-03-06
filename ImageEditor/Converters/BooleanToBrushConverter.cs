@@ -11,9 +11,9 @@ namespace ImageEditor.Converters
         {
             switch (value)
             {
-                case 0:
-                    return Brushes.Black;
                 case 1:
+                    return Brushes.Black;
+                case 0:
                     return Brushes.White;
                 case 2:
                     return Brushes.Red;

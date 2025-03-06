@@ -1,8 +1,6 @@
-using System;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ImageEditor.Views;
+
 
 namespace ImageEditor.ViewModels
 {
@@ -15,7 +13,6 @@ namespace ImageEditor.ViewModels
         public PixelViewModel (int initialColor)
         {
             Color = initialColor;
-            
         }
 
         [RelayCommand]
