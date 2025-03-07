@@ -27,5 +27,5 @@ This application provides two tabs for working with image files stored as text f
 - Click on a square to **change its color** to the selected one.
 - Click on the save button to save the changes to the selected file.  
 
-You can use the example files provided in the repository to test the application.
+You can use the example files provided in the repository, **in the Assets folder** to test the application.
 
