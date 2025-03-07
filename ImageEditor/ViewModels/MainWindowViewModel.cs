@@ -159,9 +159,9 @@ public partial class MainWindowViewModel : ObservableObject
     }
     public void ImportB16Img(string filePath)
     {
-        if (FirstImage is not null)
+        if (SecondImage is not null)
         {
-            FirstImage.Clear();
+            SecondImage.Clear();
         }
         B16Img img = B16Img.Load(FilePathB16img);
 
